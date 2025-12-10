@@ -1,4 +1,4 @@
-import { IProfile } from '../types/Profile';
+import { IProfile } from '../types/Profile.js';
 
 /**
  * Data Transfer Objects for Profile

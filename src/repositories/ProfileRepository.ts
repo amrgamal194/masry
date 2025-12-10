@@ -1,5 +1,5 @@
 import Profile from '../models/Profile.js';
-import { IProfile} from '../types/Profile';
+import { IProfile } from '../types/Profile.js';
 
 class ProfileRepository {
   // Create profile

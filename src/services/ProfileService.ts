@@ -1,7 +1,7 @@
 import profileRepository from '../repositories/ProfileRepository.js';
 import { NotFoundError, ConflictError } from '../errors/ErrorTypes.js';
 import logger from '../utils/logger.js';
-import {UpdateProfileData , IProfile} from '../types/Profile';
+import { UpdateProfileData, IProfile } from '../types/Profile.js';
 
 
 class ProfileService {
