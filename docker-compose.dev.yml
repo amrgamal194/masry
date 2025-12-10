@@ -1,0 +1,55 @@
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: masary-mongodb-dev
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: masary_db
+    volumes:
+      - mongodb_dev_data:/data/db
+    networks:
+      - masary-dev-network
+
+  # API Application (Development)
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: masary-api-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/masary_db?authSource=admin
+      JWT_SECRET: dev-secret-key-change-in-production
+      JWT_EXPIRE: 7d
+      JWT_REFRESH_SECRET: dev-refresh-secret-change-in-production
+      JWT_REFRESH_EXPIRE: 30d
+      FRONTEND_URL: http://localhost:3000
+    volumes:
+      - ./src:/app/src:ro
+      - ./package.json:/app/package.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      - /app/node_modules
+      - /app/dist
+    depends_on:
+      - mongodb
+    networks:
+      - masary-dev-network
+    command: npm run dev
+
+volumes:
+  mongodb_dev_data:
+    driver: local
+
+networks:
+  masary-dev-network:
+    driver: bridge
+
