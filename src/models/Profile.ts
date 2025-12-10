@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model } from 'mongoose';
-import { IProfile} from '../types/Profile';
+import { IProfile } from '../types/Profile.js';
 
 
 const profileSchema = new Schema<IProfile>(

@@ -143,4 +143,4 @@ export interface Config {
 
 // Re-export types for convenience
 export type { IUser } from '../models/User.js';
-export type { IProfile } from '../models/Profile.js';
+export type { IProfile, UpdateProfileData } from './Profile.js';
